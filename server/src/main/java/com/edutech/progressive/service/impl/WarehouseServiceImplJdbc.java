@@ -1,67 +1,52 @@
 package com.edutech.progressive.service.impl;
 
-import java.sql.SQLException;
-import java.util.List;
-
 import com.edutech.progressive.dao.WarehouseDAO;
 import com.edutech.progressive.entity.Warehouse;
 import com.edutech.progressive.service.WarehouseService;
 
-public class WarehouseServiceImplJdbc implements WarehouseDAO,WarehouseService {
+import java.sql.SQLException;
+import java.util.Comparator;
+import java.util.List;
+
+public class WarehouseServiceImplJdbc implements WarehouseService {
 
     private WarehouseDAO warehouseDAO;
-    
-    public WarehouseServiceImplJdbc(WarehouseDAO warehouseDAO)throws SQLException {
+
+    public WarehouseServiceImplJdbc(WarehouseDAO warehouseDAO) {
         this.warehouseDAO = warehouseDAO;
     }
 
     @Override
-    public int addWarehouse(Warehouse warehouse){
-        // TODO Auto-generated method stub
-        return -1;
+    public List<Warehouse> getAllWarehouses() throws SQLException {
+        return warehouseDAO.getAllWarehouse();
     }
 
     @Override
-    public Warehouse getWarehouseById(int warehouseId) throws SQLException{
-        // TODO Auto-generated method stub
-        return null;
+    public int addWarehouse(Warehouse warehouse) throws SQLException {
+        int id = warehouseDAO.addWarehouse(warehouse);
+        warehouse.setWarehouseId(id); // REQUIRED
+        return id;
     }
 
     @Override
-    public void updateWarehouse(Warehouse warehouse)throws SQLException {
-        // TODO Auto-generated method stub
-        
+    public void updateWarehouse(Warehouse warehouse) throws SQLException {
+        warehouseDAO.updateWarehouse(warehouse);
     }
 
     @Override
-    public void deleteWarehouse(int warehouseId) throws SQLException{
-        // TODO Auto-generated method stub
-        
+    public void deleteWarehouse(int warehouseId) throws SQLException {
+        warehouseDAO.deleteWarehouse(warehouseId);
     }
 
     @Override
-    public List<Warehouse> getAllWarehouse() throws SQLException{
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-
-    @Override
-    public List<Warehouse> getWarehousesSortedByCapacity()throws SQLException {
-        // TODO Auto-generated method stub
-        return null;
+    public Warehouse getWarehouseById(int warehouseId) throws SQLException {
+        return warehouseDAO.getWarehouseById(warehouseId);
     }
 
     @Override
-    public List<Warehouse> getAllWarehouses() {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Warehouse> getWarehousesSortedByCapacity() throws SQLException {
+        List<Warehouse> warehouses = warehouseDAO.getAllWarehouse();
+        warehouses.sort(Comparator.comparingInt(Warehouse::getCapacity)); // ASCENDING
+        return warehouses;
     }
-
-    @Override
-    public List<Warehouse> getWarehousesSortedByName()throws SQLException {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
 }
