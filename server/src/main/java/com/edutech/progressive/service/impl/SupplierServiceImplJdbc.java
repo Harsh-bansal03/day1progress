@@ -1,52 +1,52 @@
 package com.edutech.progressive.service.impl;
 
-import java.sql.SQLException;
-import java.util.List;
-
 import com.edutech.progressive.dao.SupplierDAO;
 import com.edutech.progressive.entity.Supplier;
 import com.edutech.progressive.service.SupplierService;
 
-public class SupplierServiceImplJdbc implements SupplierDAO,SupplierService {
+import java.sql.SQLException;
+import java.util.Comparator;
+import java.util.List;
 
-    SupplierDAO supplierDAO;
+public class SupplierServiceImplJdbc implements SupplierService {
 
-    public SupplierServiceImplJdbc(SupplierDAO supplierDAO)throws SQLException {
+    private SupplierDAO supplierDAO;
+
+    public SupplierServiceImplJdbc(SupplierDAO supplierDAO) {
         this.supplierDAO = supplierDAO;
     }
 
     @Override
-    public int addSupplier(Supplier supplier)  {
-        // TODO Auto-generated method stub
-        return -1;
+    public List<Supplier> getAllSuppliers() throws SQLException {
+        return supplierDAO.getAllSuppliers();
     }
 
     @Override
-    public Supplier getSupplierById(int supplierId) throws SQLException{
-        // TODO Auto-generated method stub
-        return null;
+    public int addSupplier(Supplier supplier) throws SQLException {
+        int id = supplierDAO.addSupplier(supplier);
+        supplier.setSupplierId(id); // REQUIRED by test
+        return id;
     }
 
     @Override
-    public void updateSupplier(Supplier supplier) throws SQLException{
-        // TODO Auto-generated method stub
-     
+    public void updateSupplier(Supplier supplier) throws SQLException {
+        supplierDAO.updateSupplier(supplier);
     }
 
     @Override
-    public void deleteSupplier(int supplierId)throws SQLException {
-        // TODO Auto-generated method stub
+    public void deleteSupplier(int supplierId) throws SQLException {
+        supplierDAO.deleteSupplier(supplierId);
     }
 
     @Override
-    public List<Supplier> getAllSuppliers() {
-        // TODO Auto-generated method stub
-        return null;
+    public Supplier getSupplierById(int supplierId) throws SQLException {
+        return supplierDAO.getSupplierById(supplierId);
     }
 
     @Override
     public List<Supplier> getAllSuppliersSortedByName() throws SQLException {
-        // TODO Auto-generated method stub
-        return null;
+        List<Supplier> suppliers = supplierDAO.getAllSuppliers();
+        suppliers.sort(Comparator.comparing(Supplier::getSupplierName));
+        return suppliers;
     }
 }
