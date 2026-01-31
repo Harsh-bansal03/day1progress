@@ -1,6 +1,7 @@
 package com.edutech.progressive.service.impl;
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -10,16 +11,29 @@ import java.util.List;
 import com.edutech.progressive.entity.Warehouse;
 import com.edutech.progressive.service.WarehouseService;
 
-public class WarehouseServiceImplArraylist  implements WarehouseService{
+public class WarehouseServiceImplArrayList implements WarehouseService {
 
-    private List<Warehouse> warehouseList=new ArrayList<>();
-    @Override
+    private List<Warehouse> warehouses = new ArrayList<>();
+
     public List<Warehouse> getAllWarehouses() {
-        // TODO Auto-generated method stub
-       return warehouseList;
+        return warehouses;
     }
 
-    
+    public int addWarehouse(Warehouse warehouse) {
+        warehouses.add(warehouse);
+        return warehouses.size();
+    }
+
+    public List<Warehouse> getWarehousesSortedByCapacity() {
+        List<Warehouse> list = new ArrayList<>(warehouses);
+        Collections.sort(list);
+        return list;
+    }
+
+    public void emptyArrayList() {
+        warehouses.clear();
+    }
+
     @Override
     public List<Warehouse> getWarehousesSortedByName() {
         // TODO Auto-generated method stub
@@ -30,28 +44,7 @@ public class WarehouseServiceImplArraylist  implements WarehouseService{
                 return arg0.getWarehouseName().compareTo(arg1.getWarehouseName());
             }
         };
-        Collections.sort(warehouseList,wareHouseNameComp);
-        return warehouseList;
+        Collections.sort(warehouses,wareHouseNameComp);
+        return warehouses;
     }
-
-    @Override
-    public int addWarehouse(Warehouse warehouse) {
-        // TODO Auto-generated method stub
-        warehouseList.add(warehouse);
-        return warehouseList.size();
-    }
-
-    @Override
-    public List<Warehouse> getWarehousesSortedByCapacity() {
-        // TODO Auto-generated method stub
-        List<Warehouse> sortedList=new ArrayList<>(warehouseList);
-        Collections.sort(sortedList,Collections.reverseOrder());
-        return sortedList;
-    }
-
-    public void emptyArrayList()
-    {
-        warehouseList.clear();
-    }
-
 }
