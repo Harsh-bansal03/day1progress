@@ -1,19 +1,18 @@
 package com.edutech.progressive.service.impl;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import com.edutech.progressive.dao.SupplierDAO;
 import com.edutech.progressive.entity.Supplier;
 import com.edutech.progressive.service.SupplierService;
 
-public class SupplierServiceImplArraylist  implements SupplierService{
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
-    private List<Supplier> supplierList=new ArrayList<>();
+public class SupplierServiceImplArraylist implements SupplierService {
+
+    private static List<Supplier> supplierList = new ArrayList<>();
+
     @Override
     public List<Supplier> getAllSuppliers() {
-        // TODO Auto-generated method stub
         return supplierList;
     }
 
@@ -25,17 +24,25 @@ public class SupplierServiceImplArraylist  implements SupplierService{
 
     @Override
     public List<Supplier> getAllSuppliersSortedByName() {
-        // TODO Auto-generated method stub
-        ArrayList<Supplier> sortedList=new ArrayList<>(supplierList);
-        Collections.sort(sortedList);
+        List<Supplier> sortedList = new ArrayList<>(supplierList);
+        sortedList.sort(Comparator.comparing(Supplier::getSupplierName));
         return sortedList;
-
     }
 
     @Override
     public void emptyArrayList() {
-        // TODO Auto-generated method stub
-        supplierList.clear();;
+        supplierList.clear();
     }
 
+    // JDBC/JPA placeholders (not used here)
+    @Override
+    public void updateSupplier(Supplier supplier) {}
+
+    @Override
+    public void deleteSupplier(int supplierId) {}
+
+    @Override
+    public Supplier getSupplierById(int supplierId) {
+        return null;
+    }
 }
