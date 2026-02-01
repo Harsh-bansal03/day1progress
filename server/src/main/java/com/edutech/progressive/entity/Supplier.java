@@ -1,7 +1,15 @@
 package com.edutech.progressive.entity;
 
-public class Supplier implements Comparable<Supplier>{
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "supplier")
+public class Supplier implements Comparable<Supplier> {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int supplierId;
+
     private String supplierName;
     private String email;
     private String phone;
@@ -9,12 +17,13 @@ public class Supplier implements Comparable<Supplier>{
     private String username;
     private String password;
     private String role;
-    
+
     public Supplier() {
     }
 
-    public Supplier(int supplierId, String supplierName, String email, String phone, String address, String username,
-            String password, String role) {
+    public Supplier(int supplierId, String supplierName, String email,
+                    String phone, String address, String username,
+                    String password, String role) {
         this.supplierId = supplierId;
         this.supplierName = supplierName;
         this.email = email;
@@ -23,6 +32,11 @@ public class Supplier implements Comparable<Supplier>{
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+
+    @Override
+    public int compareTo(Supplier o) {
+        return this.supplierName.compareToIgnoreCase(o.supplierName);
     }
 
     public int getSupplierId() {
@@ -76,24 +90,16 @@ public class Supplier implements Comparable<Supplier>{
     public String getPassword() {
         return password;
     }
-
+ 
     public void setPassword(String password) {
         this.password = password;
     }
-
+ 
     public String getRole() {
         return role;
     }
-
+ 
     public void setRole(String role) {
         this.role = role;
     }
-
-
-    @Override
-    public int compareTo(Supplier o) {
-        // TODO Auto-generated method stub
-        return this.supplierName.compareTo(o.supplierName);
-    }
-    
 }
