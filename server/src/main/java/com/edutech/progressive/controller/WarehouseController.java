@@ -2,33 +2,44 @@ package com.edutech.progressive.controller;
 
 import com.edutech.progressive.entity.Warehouse;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/warehouses")
 public class WarehouseController {
 
+    @GetMapping
     public ResponseEntity<List<Warehouse>> getAllWarehouses() {
         return null;
     }
 
-    public ResponseEntity<Warehouse> getWarehouseById(int warehouseId) {
+    @GetMapping("/{warehouseId}")
+    public ResponseEntity<Warehouse> getWarehouseById(@PathVariable int warehouseId) {
         return null;
     }
 
-    public ResponseEntity<Integer> addWarehouse(Warehouse warehouse) {
+    @PostMapping
+    public ResponseEntity<Integer> addWarehouse(@RequestBody Warehouse warehouse) {
         return null;
     }
 
-    public ResponseEntity<Void> updateWarehouse(int warehouseId, Warehouse warehouse) {
+    @PutMapping("/{warehouseId}")
+    public ResponseEntity<Void> updateWarehouse(
+            @PathVariable int warehouseId,
+            @RequestBody Warehouse warehouse) {
         return null;
     }
 
-    public ResponseEntity<Void> deleteWarehouse(int warehouseId) {
+    @DeleteMapping("/{warehouseId}")
+    public ResponseEntity<Void> deleteWarehouse(@PathVariable int warehouseId) {
         return null;
     }
 
-
-    public ResponseEntity<List<Warehouse>> getWarehousesBySupplier(int supplierId) {
+    @GetMapping("/supplier/{supplierId}")
+    public ResponseEntity<List<Warehouse>> getWarehousesBySupplier(
+            @PathVariable int supplierId) {
         return null;
     }
 }

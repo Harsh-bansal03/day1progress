@@ -1,23 +1,35 @@
 package com.edutech.progressive.entity;
 
-import java.util.Comparator;
+import jakarta.persistence.*;
 
-public class Warehouse implements Comparable<Warehouse>{
+@Entity
+@Table(name = "warehouse")
+public class Warehouse implements Comparable<Warehouse> {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int warehouseId;
+
     private int supplierId;
     private String warehouseName;
     private String location;
     private int capacity;
-    
+
     public Warehouse() {
     }
 
-    public Warehouse(int warehouseId, int supplierId, String warehouseName, String location, int capacity) {
+    public Warehouse(int warehouseId, int supplierId,
+                     String warehouseName, String location, int capacity) {
         this.warehouseId = warehouseId;
         this.supplierId = supplierId;
         this.warehouseName = warehouseName;
         this.location = location;
         this.capacity = capacity;
+    }
+
+    @Override
+    public int compareTo(Warehouse o) {
+        return Integer.compare(this.capacity, o.capacity);
     }
 
     public int getWarehouseId() {
@@ -58,11 +70,5 @@ public class Warehouse implements Comparable<Warehouse>{
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
-    }
-
-    @Override
-    public int compareTo(Warehouse o) {
-        // TODO Auto-generated method stub
-       return Integer.compare(o.capacity, this.capacity);
     }
 }

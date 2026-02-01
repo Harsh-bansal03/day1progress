@@ -2,32 +2,44 @@ package com.edutech.progressive.controller;
 
 import com.edutech.progressive.entity.Product;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/products")
 public class ProductController {
 
+    @GetMapping
     public ResponseEntity<List<Product>> getAllProducts() {
         return null;
     }
 
-    public ResponseEntity<Product> getProductById(int productId) {
+    @GetMapping("/{productId}")
+    public ResponseEntity<Product> getProductById(@PathVariable int productId) {
         return null;
     }
 
-    public ResponseEntity<Integer> addProduct(Product product) {
+    @PostMapping
+    public ResponseEntity<Integer> addProduct(@RequestBody Product product) {
         return null;
     }
 
-    public ResponseEntity<Void> updateProduct(int productId, Product product) {
+    @PutMapping("/{productId}")
+    public ResponseEntity<Void> updateProduct(
+            @PathVariable int productId,
+            @RequestBody Product product) {
         return null;
     }
 
-    public ResponseEntity<Void> deleteProduct(int productId) {
+    @DeleteMapping("/{productId}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable int productId) {
         return null;
     }
 
-    public ResponseEntity<List<Product>> getAllProductByWarehouse(int warehouseId) {
+    @GetMapping("/warehouse/{warehouseId}")
+    public ResponseEntity<List<Product>> getAllProductsByWarehouse(
+            @PathVariable int warehouseId) {
         return null;
     }
 }
