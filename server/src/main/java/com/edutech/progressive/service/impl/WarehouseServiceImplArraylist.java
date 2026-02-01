@@ -11,7 +11,7 @@ import java.util.List;
 import com.edutech.progressive.entity.Warehouse;
 import com.edutech.progressive.service.WarehouseService;
 
-public class WarehouseServiceImplArrayList implements WarehouseService {
+public class WarehouseServiceImplArraylist implements WarehouseService {
 
     private List<Warehouse> warehouses = new ArrayList<>();
 

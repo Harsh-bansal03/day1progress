@@ -49,4 +49,10 @@ public class WarehouseServiceImplJdbc implements WarehouseService {
         warehouses.sort(Comparator.comparingInt(Warehouse::getCapacity)); // ASCENDING
         return warehouses;
     }
+
+    @Override
+    public List<Warehouse> getWarehousesSortedByName() throws SQLException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getWarehousesSortedByName'");
+    }
 }
