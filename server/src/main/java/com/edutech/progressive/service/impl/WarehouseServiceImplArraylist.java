@@ -3,6 +3,7 @@ package com.edutech.progressive.service.impl;
 import com.edutech.progressive.entity.Warehouse;
 import com.edutech.progressive.service.WarehouseService;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -54,5 +55,11 @@ public class WarehouseServiceImplArraylist implements WarehouseService {
     @Override
     public List<Warehouse> getWarehouseBySupplier(int supplierId) {
         return null;
+    }
+
+    @Override
+    public List<Warehouse> getWarehousesSortedByName() throws SQLException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getWarehousesSortedByName'");
     }
 }

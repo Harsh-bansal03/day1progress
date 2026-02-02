@@ -3,6 +3,7 @@ package com.edutech.progressive.service.impl;
 import com.edutech.progressive.entity.Warehouse;
 import com.edutech.progressive.service.WarehouseService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class WarehouseServiceImplJpa implements WarehouseService {
@@ -45,5 +46,11 @@ public class WarehouseServiceImplJpa implements WarehouseService {
     @Override
     public void emptyArrayList() {
         // not applicable for JPA
+    }
+
+    @Override
+    public List<Warehouse> getWarehousesSortedByName() throws SQLException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getWarehousesSortedByName'");
     }
 }
