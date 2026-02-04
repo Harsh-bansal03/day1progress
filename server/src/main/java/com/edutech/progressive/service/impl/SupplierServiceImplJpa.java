@@ -1,45 +1,58 @@
 package com.edutech.progressive.service.impl;
 
 import com.edutech.progressive.entity.Supplier;
+import com.edutech.progressive.repository.SupplierRepository;
 import com.edutech.progressive.service.SupplierService;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
+@Service
 public class SupplierServiceImplJpa implements SupplierService {
+
+    private final SupplierRepository supplierRepository;
+
+    public SupplierServiceImplJpa(SupplierRepository supplierRepository) {
+        this.supplierRepository = supplierRepository;
+    }
 
     @Override
     public List<Supplier> getAllSuppliers() {
-        return new ArrayList<>();
+        return supplierRepository.findAll();
     }
 
     @Override
     public int addSupplier(Supplier supplier) {
-        return -1;
+        Supplier saved = supplierRepository.save(supplier);
+        return saved.getSupplierId();
     }
 
     @Override
     public List<Supplier> getAllSuppliersSortedByName() {
-        return new ArrayList<>();
+        List<Supplier> suppliers = supplierRepository.findAll();
+        Collections.sort(suppliers);
+        return suppliers;
     }
 
     @Override
     public void updateSupplier(Supplier supplier) {
-        // placeholder
+        supplierRepository.save(supplier);
     }
 
     @Override
     public void deleteSupplier(int supplierId) {
-        // placeholder
+        supplierRepository.deleteBySupplierId(supplierId);
     }
 
     @Override
     public Supplier getSupplierById(int supplierId) {
-        return null;
+        return supplierRepository.findBySupplierId(supplierId);
     }
 
     @Override
     public void emptyArrayList() {
-        // not applicable here
+        // not applicable for JPA
     }
 }
